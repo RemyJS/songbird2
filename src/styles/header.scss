@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0 10px;
+
+  &__logo {
+    background: url("../img/logo.png");
+    width: 200px;
+    height: 55px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  &__score {
+    display: flex;
+    align-items: center;
+  }
+}

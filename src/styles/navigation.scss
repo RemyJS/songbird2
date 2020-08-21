@@ -1,0 +1,28 @@
+$background-color: #008966;
+$border-color: #007c5d;
+$active-link: #00bc8c;
+
+.nav {
+  border-radius: 10px;
+  background-color: $background-color;
+  display: flex;
+
+  &__link {
+    text-align: center;
+    padding: 8px 12px;
+    color: white;
+    text-decoration: none;
+    width: 100%;
+    
+    &_active {
+      background-color: $active-link;
+    }
+    &_left {
+      border-radius: 10px 0 0 10px;
+    }
+
+    &_right {
+      border-radius: 0 10px 10px 0;
+    }
+  }
+}
