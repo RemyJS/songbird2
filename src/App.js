@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './components/header';
 import Navigation from './components/navigation';
 import Player from './components/player';
-
+import Playzone from './components/playzone';
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
       <Header />
       <Navigation />
       <Player />
+      <Playzone />
     </div>
   );
 }

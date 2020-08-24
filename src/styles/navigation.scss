@@ -6,12 +6,13 @@ $active-link: #00bc8c;
   border-radius: 10px;
   background-color: $background-color;
   display: flex;
+  padding: 0;
 
   &__link {
     text-align: center;
     padding: 8px 12px;
     color: white;
-    text-decoration: none;
+    list-style: none;
     width: 100%;
     
     &_active {
