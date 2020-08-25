@@ -25,3 +25,11 @@
   width: 100%;
   max-width: 420px;
 }
+
+
+@media (max-width: 892px) {
+  .control__wrapper {
+    width: 80%;
+    max-width: none;
+  }
+}
