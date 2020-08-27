@@ -2,7 +2,7 @@ import React from "react";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import unknowBird from "../img/unknowBird.jpg";
-import frExample from '../audio/fr.mp3';
+import frExample from '../audio/fr.m4a';
 
 export default function player() {
   return (
@@ -18,8 +18,6 @@ export default function player() {
           <AudioPlayer
             autoPlay
             src={frExample}
-            onPlay={(e) => console.log("onPlay")}
-            // other props here
           />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default function nextlevel() {
+export default function nextlevel(props) {
   return (
-    <button className='nextLevel'>Next Level</button>
+  <button className='nextLevel' onClick={props.setRound}>Next Level{props.round}</button>
   )
 }
