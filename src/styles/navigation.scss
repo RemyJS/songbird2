@@ -8,6 +8,7 @@ $active-link: #00bc8c;
   display: flex;
   flex-wrap: wrap;
   padding: 0;
+  overflow: hidden;
 
   &__link {
     flex: auto;
@@ -18,13 +19,6 @@ $active-link: #00bc8c;
     
     &_active {
       background-color: $active-link;
-    }
-    &_left {
-      border-radius: 10px 0 0 10px;
-    }
-
-    &_right {
-      border-radius: 0 10px 10px 0;
     }
   }
 }

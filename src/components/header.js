@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Header(props) {
-  console.log(props);
   return (
     <div className='header' >
       <div className='header__logo'></div>

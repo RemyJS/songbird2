@@ -3,6 +3,11 @@
   padding: 10px;
 
   &__img {
+    img {
+      width: 200px;
+      height: 155px;
+      border-radius: 10px;
+    }
     margin-right: 40px;
   }
 

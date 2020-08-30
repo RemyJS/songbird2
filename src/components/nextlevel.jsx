@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function nextlevel(props) {
   return (
-  <button className='nextLevel' onClick={props.setRound}>Next Level{props.round}</button>
+  <button className={props.isComplitedRound ? 'nextLevel nextLevel_next': 'nextLevel'} onClick={props.setRound}>Next Level</button>
   )
 }
