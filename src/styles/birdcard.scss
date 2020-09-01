@@ -1,0 +1,15 @@
+.birdCard {
+  border: 2px solid #444;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 430px;
+  padding: 10px 20px;
+}
+
+@media (max-width: 892px) {
+  .birdCard {
+    width: 70%;
+    max-width: none;
+    margin: 20px 0;
+  }
+}

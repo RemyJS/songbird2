@@ -1,0 +1,105 @@
+.player {
+  display: flex;
+  padding: 10px;
+
+  &__img {
+    img {
+      width: 200px;
+      height: 155px;
+      border-radius: 10px;
+    }
+    margin-right: 40px;
+  }
+
+  &__aside {
+    width: 100%;
+    &__name {
+      padding: 5px;
+      border-bottom: 1px solid #555;
+    }
+  }
+}
+@media (max-width: 570px) {
+  .player {
+    flex-direction: column;
+  }
+}
+
+.rhap_container {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.rhap_progress-section {
+  display: flex;
+  flex: 3 1 auto;
+  align-items: center;
+}
+
+.rhap_progress-bar-show-download {
+  background-color: rgba(221, 221, 221, 0.5);
+}
+
+.rhap_progress-bar {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 5px;
+  background-color: #dddddd;
+  border-radius: 2px;
+}
+.rhap_progress-indicator {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 3;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  top: -8px;
+  background: #868686;
+  border-radius: 50px;
+  box-shadow: rgba(134, 134, 134, 0.5) 0 0 5px;
+}
+.rhap_progress-filled {
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+  background: linear-gradient(
+    to right,
+    rgb(0, 188, 140) 0%,
+    rgb(61, 133, 140) 100%
+  );
+  border-radius: 2px;
+}
+.rhap_progress-container {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  flex: 1 0 auto;
+  align-self: center;
+  margin: 0 calc(10px + 1%);
+  cursor: pointer;
+  -webkit-user-select: none;
+}
+.rhap_download-progress {
+  background-color: #737373 !important;
+}
+.rhap_additional-controls {
+  display: none !important;
+}
+
+.rhap_controls-section {
+  margin: 0 !important;
+  flex: 0 !important;  
+}
+
+.rhap_button-clear {
+  outline: none;
+}
+.rhap_rewind-button {
+  display: none;
+}
+.rhap_forward-button {
+  display: none;
+}

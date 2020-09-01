@@ -1,0 +1,51 @@
+.control {
+  padding: 0;
+  margin: 0;
+  
+  &__item {
+    padding: 18px;
+    background-color: #303030;
+    border: 1px solid #555;
+    list-style: none;
+    cursor: pointer;
+    &:hover {
+      background-color: #555;
+    }
+  }
+
+  .indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 15px;
+    border-radius: 50%;
+    -webkit-transition: .1s;
+    transition: .1s;
+    background-color: #666;
+
+    &_correct {
+      background-color: #00bc8c;
+    }
+
+    &_error {
+      background-color: red;
+    }
+  }
+}
+
+.control__wrapper {
+  width: 100%;
+  height: 100%;
+  max-width: 420px;
+  border: 1px solid #555;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+
+@media (max-width: 892px) {
+  .control__wrapper {
+    width: 80%;
+    max-width: none;
+  }
+}
