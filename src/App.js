@@ -4,7 +4,13 @@ import Navigation from "./components/navigation";
 import Player from "./components/player";
 import Playzone from "./components/playzone";
 import Nextlevel from "./components/nextlevel";
-import birds from './data/birdsData';
+import Final from './components/final';
+import birds from "./data/birdsData";
+import correctSound from './audio/correct.mp3';
+import errorSound from './audio/error.mp3';
+import finalSound from './audio/success.mp3';
+import mkSound from './audio/flawless.mp3';
+
 
 class App extends React.Component {
   state = {
@@ -15,9 +21,14 @@ class App extends React.Component {
     isComplitedRound: false,
     selectedBird: null,
     questionBirdId: null,
+    birds: [],
+    gameOver: false,
+    sound: null,
   };
+
   componentDidMount() {
     this.setRandom();
+    this.setBirds();
   }
 
   setScore = () => {
@@ -26,13 +37,14 @@ class App extends React.Component {
       score: total,
     });
   };
+
   setRound = () => {
-    if(!this.state.isComplitedRound) return;
+    if (!this.state.isComplitedRound) return;
     let r = this.state.round;
     if (r < 5) {
       r += 1;
     } else {
-      r = 0;
+      this.showResult();
     }
     this.setState({
       round: r,
@@ -42,6 +54,7 @@ class App extends React.Component {
     });
     this.setRandom();
   };
+  
   setRandom = () => {
     const rand = Math.floor(Math.random() * 6);
     const questionId = birds[this.state.round][rand].id;
@@ -50,42 +63,133 @@ class App extends React.Component {
       questionBirdId: questionId,
     });
   };
+
   checkCard = () => {
     this.setState({
       isComplitedRound: true,
     });
   };
+
   onSelected = (bird) => {
-    this.setState({
-      selectedBird: bird,
-    });
-    console.log(bird.id, this.state.questionBirdId);
-    if(bird.id === this.state.questionBirdId){
+    const {birds, round} = this.state;
+    
+    if (bird.id === this.state.questionBirdId) {
       this.setScore();
       this.checkCard();
-    }else{
+      bird.corect = true;
+    } else if (!bird.clicked){
       let b = this.state.bonusScore - 1;
       this.setState({
         bonusScore: b,
-      })
+      });
     }
+    bird.clicked = true;
+    
+    birds[round][bird.id - 1] = bird;
+    this.setState({
+      selectedBird: bird,
+      birds: birds,
+    });
+    setTimeout(() => {this.playSound()}, 200);
+  };
+  
+  showResult = () => {
+    this.setState({
+      gameOver: true,
+    })
+    setTimeout(() => {this.playSound()}, 200);
+  };
+
+  restGame = () => {
+    this.setState({
+      score: 0,
+      bonusScore: 5,
+      round: 0,
+      isComplitedRound: false,
+      selectedBird: null,
+      questionBirdId: null,
+      gameOver: false,
+    });
+    this.setBirds();
+    this.setRandom();
   }
 
+  setBirds = () => {
+    const mappedBirds = birds.map((groupBirds) => {
+      return groupBirds.map((bird) => ({
+        ...bird,
+        corect: false,
+        clicked: false,
+      }));
+    });
+    this.setState({
+      birds: mappedBirds,
+    });
+  }
+
+  playSound = () => {
+    const {gameOver, questionBirdId, selectedBird } = this.state;
+    if(gameOver){
+      const audio = new Audio(finalSound);
+      audio.play();
+      if (this.state.score === 30){
+        const audio2 = new Audio(mkSound);
+        setTimeout(() => {audio2.play()}, 2500);  
+      }
+    } else {
+      if (selectedBird.id === questionBirdId){
+        const audio = new Audio(correctSound);
+        audio.play();
+      }else {
+        const audio = new Audio(errorSound);
+        audio.play();
+      }
+    }
+  }
+  
   render() {
-    return (
-      <div className="wrapper">
-        <Header score={this.state.score} />
-        <Navigation round={this.state.round} />
-        <Player
-          round={this.state.round}
-          random={this.state.random}
-          isComplitedRound={this.state.isComplitedRound}
-          setQuestionId={this.setQuestionId}
-        />
-        <Playzone round={this.state.round} selectedBird={this.state.selectedBird} questionBirdId={ this.state.questionBirdId } onSelected={this.onSelected} />
-        <Nextlevel setRound={this.setRound} isComplitedRound={this.state.isComplitedRound}/>
-      </div>
-    );
+    const {
+      score,
+      round,
+      random,
+      birds,
+      isComplitedRound,
+      selectedBird,
+      questionBirdId,
+      gameOver
+    } = this.state;
+    const isBirds = birds.length;
+    if (!gameOver) {
+      return (
+        <div className="wrapper">
+          <Header score={score} />
+          <Navigation round={round} />
+          <Player
+            round={round}
+            random={random}
+            isComplitedRound={isComplitedRound}
+            setQuestionId={this.setQuestionId}
+          />
+          <Playzone
+            round={round}
+            selectedBird={selectedBird}
+            questionBirdId={questionBirdId}
+            onSelected={ this.onSelected }
+            birds={isBirds? birds[round] : []}
+          />
+          <Nextlevel setRound={this.setRound} isComplitedRound={isComplitedRound}/>
+        </div>
+      );
+    } else {
+      return (
+        <div className="wrapper">
+          <Header score={score} />
+          <Navigation round={round} />
+          <Final score={this.state.score} restGame={this.restGame}/>
+        </div>
+      );
+    } 
+
   }
 }
 

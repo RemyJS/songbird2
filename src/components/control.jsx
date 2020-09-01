@@ -1,10 +1,10 @@
 import React from "react";
-import Item from './controlItem';
-import birds from '../data/birdsData'
+import ControlItem from './controlItem';
+
 
 export default function control(props) {
-  const items = birds[props.round].map((bird) => {
-    return <Item key={bird.id} onSelected={props.onSelected} bird={bird} questionBirdId={ props.questionBirdId }></Item>
+  const items = props.birds.map((bird) => {
+    return <ControlItem key={bird.id}  bird={bird} onSelected={props.onSelected} ></ControlItem>
   });
   return (
     <div className="control__wrapper">

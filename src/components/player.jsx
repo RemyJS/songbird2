@@ -6,8 +6,7 @@ import birds from '../data/birdsData'
 
 export default function player(props) {
   const { round = 0 , random = 0} = props;
-  const {id, name, species, audio, image} = birds[round][random];
-  // props.setQuestionId(id);
+  const { name, audio, image} = birds[round][random];
   if(props.isComplitedRound){
     return (
       <div className="player">
@@ -27,7 +26,7 @@ export default function player(props) {
       </div>
     );
   } else if (props.selectedBird) {
-    const {id, name, species, audio, image } = props.selectedBird;
+    const { name, species, audio, image } = props.selectedBird;
     return (
       <div className="player">
         <div className="player__img">
@@ -36,6 +35,7 @@ export default function player(props) {
         <div className="player__aside">
           <div className="player__aside__name">
             <h1>{name}</h1>
+            <h4>{species}</h4>
           </div>
           <div className="player__audio">
             <AudioPlayer
